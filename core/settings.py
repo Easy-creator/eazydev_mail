@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-r(cm7x1a7(qh04cr((a^+(__k5nbioa#xf$8-#2iqnca=o(j1z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'eazydevmail.pythonanywhere.com',
+    'https://eazydevmail.pythonanywhere.com'
+]
 
 
 # Application definition
