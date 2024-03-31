@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-r(cm7x1a7(qh04cr((a^+(__k5nbioa#xf$8-#2iqnca=o(j1z
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'eazydevmail.pythonanywhere.com',
-    'https://eazydevmail.pythonanywhere.com',
-    '127.0.0.1'
+    '127.0.0.1',
+    'http://mailing.dtsluxtransport.com',
+    'mailing.dtsluxtransport.com',
 ]
 
 
