@@ -39,8 +39,8 @@ class Nel_PassPhrase(models.Model):
         return str(self.date)
 
     class Meta:
-        verbose_name = 'Keys'
-        verbose_name_plural = 'Keys'
+        verbose_name = 'Nel Keys'
+        verbose_name_plural = 'Nel Keys'
         ordering = ['-date']
 
 
