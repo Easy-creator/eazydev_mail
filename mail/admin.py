@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PassPhrase, Nel_PassPhrase
+from .models import PassPhrase, Nel_PassPhrase, Chi_PassPhrase
 # Register your models here.
 class YourModelAdmin(admin.ModelAdmin):
     readonly_fields = ('keys',)
@@ -8,3 +8,4 @@ class YourModelAdmin(admin.ModelAdmin):
 
 admin.site.register(PassPhrase, YourModelAdmin)
 admin.site.register(Nel_PassPhrase, YourModelAdmin)
+admin.site.register(Chi_PassPhrase, YourModelAdmin)
