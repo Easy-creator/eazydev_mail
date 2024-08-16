@@ -70,3 +70,20 @@ class Chi_PassPhrase(models.Model):
 @receiver(pre_delete, sender=Chi_PassPhrase)
 def prevent_delete(sender, instance, **kwargs):
     raise models.ProtectedError("You cannot delete anything", instance)
+
+class Santus_PassPhrase(models.Model):
+    keys = models.TextField(null=False, blank=False, max_length=500, unique=True)
+    amount_of_pi = models.CharField(null=True, blank=True, max_length=100)
+    unlock_date = models.DateTimeField(null=True, blank=True)
+    is_verified = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
+    look_up = models.CharField(null=False, blank=False, max_length=20)
+
+    def __str__(self):
+        return str(self.date)
+
+    class Meta:
+        verbose_name = 'Santus Keys'
+        verbose_name_plural = 'Santus Keys'
+        ordering = ['-date']
